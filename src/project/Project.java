@@ -52,13 +52,26 @@ public class Project {
 
     public void projectInfo()
     {
-     System.out.println(this.name);
-     System.out.println("backend:"+this.pointsToDo[0]);
-     System.out.println("frontend:"+this.pointsToDo[1]);
-     System.out.println("bazy danych:"+this.pointsToDo[2]);
-     System.out.println("aplikacje mobilne:"+this.pointsToDo[3]);
-     System.out.println("WordPress:"+ this.pointsToDo[4]);
-     System.out.println("prestashop:" + this.pointsToDo[5]);
+
+        System.out.println(this.name);
+        for(int i = 0 ; i < 6 ; i++) {
+            if(pointsToDo[i]>0) {
+                switch(i) {
+                    case 0:   System.out.println("backend:" + this.pointsToDo[0]);
+                        break;
+                    case 1:   System.out.println("frontend:" + this.pointsToDo[1]);
+                        break;
+                    case 2:   System.out.println("bazy danych:" + this.pointsToDo[2]);
+                        break;
+                    case 3:   System.out.println("aplikacje mobilne:" + this.pointsToDo[3]);
+                        break;
+                    case 4:   System.out.println("WordPress:" + this.pointsToDo[4]);
+                        break;
+                    case 5:   System.out.println("prestashop:" + this.pointsToDo[5]);
+                        break;
+                }
+            }
+        }
      System.out.println("poziom zaawansowania:" + this.dificultLevel);
     }
 

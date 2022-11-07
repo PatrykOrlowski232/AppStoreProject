@@ -1,21 +1,40 @@
+import game.Game;
 import humans.*;
+import player.Player;
 import project.Project;
+
+import javax.sound.midi.SysexMessage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
+
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException , IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
 
-        Project p2 = new Project();
-        Programist p1 = new Programist();
 
-        p1.project = p2;
+   Game game = new Game();
+   Scanner scanner = new Scanner(System.in);
 
-      p1.programistInfo();
-      p2.projectInfo();
-      p1.work();
-      p2.projectInfo();
+        int turn = 0;
+   while(true) {
+
+
+       game.drawGame(turn);
+       scanner.nextLine();
+       game.players[turn].addEmployer();
+       game.players[turn].cash +=1000.0;
+
+       turn++;
+       if(turn == game.numbersOfPlayers) {
+           turn = 0;
+           game.nextDay(turn);
+       }
+
+   }
+
+
 
 
 
@@ -28,4 +47,6 @@ public class Main {
     }
 
 
-}
+
+        }
+

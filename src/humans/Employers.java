@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
-public  class Programist extends Human {
+public  class Employers extends Human {
 
     public int[] skillTechnology = new int[6];
     public String position;
@@ -16,12 +16,14 @@ public  class Programist extends Human {
 
     public int failChance;
 
-    public Project project;
+    private Project project;
+
+    boolean knowledge;
 
 
     Generator generator = new Generator();
 
-    public Programist() throws FileNotFoundException , IOException {//konstruktor obiektu programista
+    public Employers() throws FileNotFoundException , IOException {//konstruktor obiektu programista
 
         generator.dice = generator.rollDice(4);
 
@@ -77,30 +79,60 @@ public  class Programist extends Human {
     public void programistInfo()
     {
         System.out.println(this.name);
-        System.out.println("backend:"+this.skillTechnology[0]);
-        System.out.println("frontend:"+this.skillTechnology[1]);
-        System.out.println("bazy danych:"+this.skillTechnology[2]);
-        System.out.println("aplikacje mobilne:"+this.skillTechnology[3]);
-        System.out.println("WordPress:"+ this.skillTechnology[4]);
-        System.out.println("prestashop:" + this.skillTechnology[5]);
         System.out.println("poziom zaawansowania:" + this.position);
         System.out.println("Wynagrodzenie:" + this.price);
-        System.out.println("pracuje nad:" + this.project.name);
+
+
+        for(int i = 0 ; i < 6 ; i++) {
+            if(skillTechnology[i]>0) {
+                switch(i) {
+                    case 0:   System.out.println("backend:" + this.skillTechnology[0]);
+                    break;
+                    case 1:   System.out.println("frontend:" + this.skillTechnology[1]);
+                    break;
+                    case 2:   System.out.println("bazy danych:" + this.skillTechnology[2]);
+                    break;
+                    case 3:   System.out.println("aplikacje mobilne:" + this.skillTechnology[3]);
+                    break;
+                    case 4:   System.out.println("WordPress:" + this.skillTechnology[4]);
+                    break;
+                    case 5:   System.out.println("prestashop:" + this.skillTechnology[5]);
+                    break;
+                                         }
+                                         }
+                                         }
+
     }
 
   public   void work(){
 
 
+      if(this.sick() == false) {
+          for (int i = 0; i < 6; i++) {
+              if (this.project.pointsToDo[i] != 0 && this.skillTechnology[i] != 0) {
+                  this.project.pointsToDo[i] -= this.skillTechnology[i];
 
-        for(int i = 0 ; i <6 ; i++){
-            if(this.project.pointsToDo[i] !=0 && this.skillTechnology[i] !=0 )
-            {
-                this.project.pointsToDo[i] -= this.skillTechnology[i];
-                System.out.println("Pracownik pracował nad projektem");
-                break;
-            }
-            else
-                System.out.println("Pracownik nie zna tej technologii");
+                  break;
+              }
+          }
+      }else
+          System.out.println("Pracownik jest chory");
+
         }
+
+
+    public void projectSetteer(Project project){
+
+         knowledge = false;
+
+            for (int i = 0; i < 6; i++)
+                if (project.pointsToDo[i] > 0 && this.skillTechnology[i] > 0) {
+                    this.project = project;
+                    knowledge = true;
+                    break;
+                }
+            if (knowledge == false)
+                System.out.println("Pracownik nie ma odpowiednych umiejętności do pracy nad tym projektem");
+
     }
 }

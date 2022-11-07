@@ -35,7 +35,7 @@ public class Generator {
 
     public String nameGenerator(String filePath) throws FileNotFoundException , IOException {
 
-        File file = new File(filePath);  //Załadownie pliku z imionami
+        File file = new File(filePath);  //Załadownie pliku z nazwami
         Scanner in = new Scanner(file);
 
          int lineCount = (int) Files.lines(Paths.get(filePath), StandardCharsets.UTF_8).count();

@@ -11,15 +11,16 @@ public abstract class Human {
     public int sickDays;
 
     Generator generator = new Generator();
-    public void sick ()
+    public boolean sick ()
     {
-        if (!isSick) {
-            generator.dice = generator.rollDice(101);
-            if (generator.dice <= 30) {
-                isSick = true;
+        if (sickDays == 0) {
+            generator.dice = generator.rollDice(100);
+            if (generator.dice <= 15) {
                 sickDays += 5;
+                return(true);
 
             }
-        }
+        }return(false);
     }
 }
+
