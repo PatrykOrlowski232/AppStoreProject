@@ -17,10 +17,10 @@ public abstract class Human {
             generator.dice = generator.rollDice(100);
             if (generator.dice <= 15) {
                 sickDays += 5;
-                return(true);
+                return true;
 
             }
-        }return(false);
+        }return false;
     }
 }
 

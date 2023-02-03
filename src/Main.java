@@ -17,19 +17,15 @@ public class Main {
    Game game = new Game();
    Scanner scanner = new Scanner(System.in);
 
-        int turn = 0;
+
    while(true) {
 
 
-       game.drawGame(turn);
-       scanner.nextLine();
-       game.players[turn].addEmployer();
-       game.players[turn].cash +=1000.0;
+       game.drawGame(game.turns);
 
-       turn++;
-       if(turn == game.numbersOfPlayers) {
-           turn = 0;
-           game.nextDay(turn);
+       if(game.turns == game.numbersOfPlayers) {
+           game.turns = 0;
+           game.nextDay();
        }
 
    }

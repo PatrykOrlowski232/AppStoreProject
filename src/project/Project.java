@@ -2,16 +2,18 @@ package project;
 import generator.Generator;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Project {
 
-    Double price;
+    public Double price;
+    public LocalDate date;
    public  String name;
-    Boolean done;
+    public Boolean done;
    public  int[] pointsToDo = new int[6];
-    int deadline;
-    int timeofpayot;
-    String client;
+    public long deadline;
+   public  LocalDate timeofpayot;
+
   public  int dificultLevel;
 
 
@@ -19,21 +21,22 @@ public class Project {
     public Project() throws FileNotFoundException , IOException {
 
      generator.dice = generator.rollDice(3);
+     done = false;
 
      switch (generator.dice) {
       case 0 -> {
        this.dificultLevel = 1;
-       this.deadline = 20;
+       deadline = 20;
        this.price = 10000.0;
       }
       case 1 -> {
        this.dificultLevel = 2;
-       this.deadline = 30;
+       deadline = 30;
        this.price = 20000.0;
       }
       case 2 -> {
        this.dificultLevel = 3;
-       this.deadline = 40;
+       deadline = 40;
        this.price = 40000.0;
       }
      }
@@ -54,6 +57,8 @@ public class Project {
     {
 
         System.out.println(this.name);
+        if(done == true)
+            System.out.println("Czas do otrzymania zapłaty "+ timeofpayot);
         for(int i = 0 ; i < 6 ; i++) {
             if(pointsToDo[i]>0) {
                 switch(i) {
