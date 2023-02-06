@@ -1,5 +1,7 @@
 package project;
 import generator.Generator;
+import humans.Client;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -7,37 +9,56 @@ import java.time.LocalDate;
 public class Project {
 
     public Double price;
-    public LocalDate date;
+    public LocalDate dayToDeadline;
    public  String name;
     public Boolean done;
    public  int[] pointsToDo = new int[6];
     public long deadline;
+
+    public boolean itsLets;
+
+    public boolean isTested;
+
+    public double deadlinepunish;
+
+    public boolean playerWorked;
+
+    public Client client;
    public  LocalDate timeofpayot;
+
+   String testedAnswer;
 
   public  int dificultLevel;
 
 
     Generator generator = new Generator();
-    public Project() throws FileNotFoundException , IOException {
-
+    public Project(Client client) throws FileNotFoundException , IOException {
+     this.client = client;
      generator.dice = generator.rollDice(3);
      done = false;
+     isTested = false;
+     playerWorked = false;
+     itsLets = false;
+
+
 
      switch (generator.dice) {
       case 0 -> {
-       this.dificultLevel = 1;
+      dificultLevel = 1;
        deadline = 20;
-       this.price = 10000.0;
+       price = 10000.0;
+       deadlinepunish = price * 0.3 ;
       }
       case 1 -> {
-       this.dificultLevel = 2;
+       dificultLevel = 2;
        deadline = 30;
-       this.price = 20000.0;
+       price = 20000.0;
       }
       case 2 -> {
-       this.dificultLevel = 3;
+       dificultLevel = 3;
        deadline = 40;
-       this.price = 40000.0;
+       price = 40000.0;
+       deadlinepunish = price * 0.4 ;
       }
      }
 
@@ -56,9 +77,19 @@ public class Project {
     public void projectInfo()
     {
 
-        System.out.println(this.name);
-        if(done == true)
-            System.out.println("Czas do otrzymania zapłaty "+ timeofpayot);
+
+
+        System.out.println(name);
+
+        System.out.println("Klient:" + client.name);
+
+        if(isTested == true) testedAnswer = "Tak";
+        else testedAnswer = "Nie";
+        if(done == true) {
+            System.out.println("Czas do otrzymania zapłaty " + timeofpayot);
+            System.out.println("Testowany: " + testedAnswer);
+
+        }
         for(int i = 0 ; i < 6 ; i++) {
             if(pointsToDo[i]>0) {
                 switch(i) {
@@ -77,7 +108,9 @@ public class Project {
                 }
             }
         }
-     System.out.println("poziom zaawansowania:" + this.dificultLevel);
+     System.out.println("poziom zaawansowania:" + dificultLevel);
+     System.out.println("Kara za przekroczenie terminu:" + deadlinepunish);
+     System.out.println("Zapłata :" + price);
     }
 
 }

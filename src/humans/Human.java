@@ -15,7 +15,7 @@ public abstract class Human {
     {
         if (sickDays == 0) {
             generator.dice = generator.rollDice(100);
-            if (generator.dice <= 15) {
+            if (generator.dice <= 5) {
                 sickDays += 5;
                 return true;
 

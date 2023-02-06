@@ -25,8 +25,9 @@ public  class Employers extends Human {
     Generator generator = new Generator();
 
     public Employers() throws FileNotFoundException , IOException {//konstruktor obiektu programista
+        this.name = generator.nameGenerator("src/humans/HumanName");
 
-        generator.dice = generator.rollDice(4);
+        generator.dice = generator.rollDice(6);
 
         switch (generator.dice) {   //przy pomocy rzutu kostką , losowany jest stopień zaawansowania nowego pracownika , oraz pieniądze potrzebne na jego utrzymanie
             case 0 -> {
@@ -53,6 +54,16 @@ public  class Employers extends Human {
                 this.skillPoint = 8;
                 failChance = 10;
             }
+            case 4 -> {
+                this.position = "tester";
+                this.price = 5000.0;
+
+            }
+            case 5 -> {
+                this.position = "marketingowiec";
+                this.price = 5000.0;
+
+            }
         }
 
 
@@ -68,7 +79,7 @@ public  class Employers extends Human {
             }
 
 
-            this.name = generator.nameGenerator("src/humans/HumanName");
+
 
             this.isSick = false;
 
@@ -84,6 +95,10 @@ public  class Employers extends Human {
         System.out.println("Wynagrodzenie: " + price);
         if(project != null)
         System.out.println("Pracuje nad: " + project.name);
+        if(sickDays > 0)
+            System.out.println("Chory");
+        else
+            System.out.println("Zdrowy");
 
 
         for(int i = 0 ; i < 6 ; i++) {

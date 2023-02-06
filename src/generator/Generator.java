@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Generator {
+public  class Generator {
 
 
 
